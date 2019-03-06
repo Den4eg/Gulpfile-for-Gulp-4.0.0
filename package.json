@@ -15,7 +15,6 @@
     "eslint-plugin-node": "^8.0.1",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
-    "gulp-cache": "^1.1.1",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
