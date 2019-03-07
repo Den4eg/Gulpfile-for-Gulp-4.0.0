@@ -5,8 +5,6 @@ var rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
     autoprefixer = require('gulp-autoprefixer'),
     imagemin = require('gulp-imagemin'),
-    //	del 		= 	require('del'),
-    //	pngquant	=	require('imagemin-pngquant'),
     cleaner = require('gulp-clean'),
     concat = require('gulp-concat');
 
@@ -27,13 +25,13 @@ function cleanFolder() {
     return src('dist').pipe(cleaner());
 }
 
-function sas(cb) {
+function sas() {
     return src('dev/sass/**/*.scss')
         .pipe(sass())
         .pipe(dest('dev/css'));
 }
 
-function css(cb) {
+function css() {
     return src('dev/css/**/*.css')
         .pipe(
             autoprefixer({
@@ -52,7 +50,7 @@ function css(cb) {
         .pipe(browserSync.stream());
 }
 
-function scripts(cb) {
+function scripts() {
     return src('dev/js/*.js')
         .pipe(concat('scripts.js'))
         .pipe(
@@ -83,4 +81,4 @@ function dev() {
 }
 
 task('default', dev);
-exports.build = series(cleanFolder, parallel(imgMin, html, sas, css, scripts));
+exports.build = series(cleanFolder, parallel(imgMin, html, series(sas, css), scripts));
